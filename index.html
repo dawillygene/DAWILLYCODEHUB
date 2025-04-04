@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeShare Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+        }
+        
+        .badge {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 9999px;
+            margin-right: 0.5rem;
+            background-color: #e5e7eb;
+            color: #4b5563;
+            display: inline-block;
+        }
+        
+        .bg-pattern {
+            background-color: #f9fafb;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e5e7eb' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .download-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .download-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .download-btn:hover::after {
+            left: 100%;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold text-indigo-600">CodeShare</div>
+                </div>
+                <div class="flex items-center">
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="#projects" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                            <a href="#download" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Download</a>
+                            <a href="#about" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">About Me</a>
+                            <a href="#contact" class="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-pattern pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                    <span class="block">Share Your Code</span>
+                    <span class="block text-indigo-600">With The World</span>
+                </h1>
+                <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+                    A platform to showcase your programming projects and let others benefit from your creations.
+                </p>
+                <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
+                    <div class="rounded-md shadow">
+                        <a href="#projects" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+                            Explore Projects
+                        </a>
+                    </div>
+                    <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+                        <a href="#contact" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
+                            Get In Touch
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    My Projects
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                    Check out my latest software creations. All projects are available for download.
+                </p>
+            </div>
+
+            <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Project 1 -->
+                <div class="project-card bg-white overflow-hidden shadow rounded-lg">
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
+                                <i class="fas fa-calculator text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Advanced Calculator</h3>
+                                <p class="text-sm text-gray-500">v2.1.0</p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-gray-600">A scientific calculator with support for complex equations, graphing, and unit conversions.</p>
+                        </div>
+                        <div class="mt-4">
+                            <span class="badge">Python</span>
+                            <span class="badge">Tkinter</span>
+                            <span class="badge">Mathematics</span>
+                        </div>
+                        <div class="mt-6">
+                            <a href="#download" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card bg-white overflow-hidden shadow rounded-lg">
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-green-500 rounded-md p-3">
+                                <i class="fas fa-tasks text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">TaskMaster Pro</h3>
+                                <p class="text-sm text-gray-500">v3.0.2</p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-gray-600">A productivity tool that helps you manage tasks, track time, and improve workflow efficiency.</p>
+                        </div>
+                        <div class="mt-4">
+                            <span class="badge">JavaScript</span>
+                            <span class="badge">React</span>
+                            <span class="badge">Productivity</span>
+                        </div>
+                        <div class="mt-6">
+                            <a href="#download" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-500 hover:bg-green-600">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card bg-white overflow-hidden shadow rounded-lg">
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-blue-500 rounded-md p-3">
+                                <i class="fas fa-image text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">ImageEnhancer</h3>
+                                <p class="text-sm text-gray-500">v1.4.5</p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-gray-600">Batch image processing tool with filters, optimization, and format conversion capabilities.</p>
+                        </div>
+                        <div class="mt-4">
+                            <span class="badge">C++</span>
+                            <span class="badge">OpenCV</span>
+                            <span class="badge">Media</span>
+                        </div>
+                        <div class="mt-6">
+                            <a href="#download" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-500 hover:bg-blue-600">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card bg-white overflow-hidden shadow rounded-lg">
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-purple-500 rounded-md p-3">
+                                <i class="fas fa-database text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">DataVault</h3>
+                                <p class="text-sm text-gray-500">v2.8.0</p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-gray-600">Secure password and personal information manager with encryption and cloud sync.</p>
+                        </div>
+                        <div class="mt-4">
+                            <span class="badge">Java</span>
+                            <span class="badge">Security</span>
+                            <span class="badge">Database</span>
+                        </div>
+                        <div class="mt-6">
+                            <a href="#download" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-500 hover:bg-purple-600">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card bg-white overflow-hidden shadow rounded-lg">
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-red-500 rounded-md p-3">
+                                <i class="fas fa-music text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">MusicMixer</h3>
+                                <p class="text-sm text-gray-500">v1.2.3</p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-gray-600">Audio editing and mixing tool with support for multiple formats and sound effects.</p>
+                        </div>
+                        <div class="mt-4">
+                            <span class="badge">C#</span>
+                            <span class="badge">.NET</span>
+                            <span class="badge">Audio</span>
+                        </div>
+                        <div class="mt-6">
+                            <a href="#download" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-500 hover:bg-red-600">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card bg-white overflow-hidden shadow rounded-lg">
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-yellow-500 rounded-md p-3">
+                                <i class="fas fa-code text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">CodeReviewer</h3>
+                                <p class="text-sm text-gray-500">v0.9.1</p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-gray-600">Static code analysis tool that identifies bugs, security vulnerabilities, and style issues.</p>
+                        </div>
+                        <div class="mt-4">
+                            <span class="badge">Python</span>
+                            <span class="badge">Development</span>
+                            <span class="badge">Security</span>
+                        </div>
+                        <div class="mt-6">
+                            <a href="#download" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-yellow-500 hover:bg-yellow-600">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="py-12 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Download My Software
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                    All programs are free to use and regularly updated with new features.
+                </p>
+            </div>
+
+            <div class="mt-12">
+                <div class="bg-white shadow overflow-hidden rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Program Name
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Version
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Platform
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Size
+                                </th>
+                                <th scope="col" class="relative px-6 py-3">
+                                    <span class="sr-only">Download</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500">
+                                            <i class="fas fa-calculator"></i>
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">
+                                                Advanced Calculator
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">v2.1.0</div>
+                                    <div class="text-sm text-gray-500">Released: Jan 12, 2023</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        Windows
+                                    </span>
+                                    <span class="ml-1 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                        macOS
+                                    </span>
+                                    <span class="ml-1 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                        Linux
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    15.2 MB
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#" class="download-btn text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-md">Download</a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-green-100 text-green-500">
+                                            <i class="fas fa-tasks"></i>
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">
+                                                TaskMaster Pro
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">v3.0.2</div>
+                                    <div class="text-sm text-gray-500">Released: Mar 5, 2023</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        Windows
+                                    </span>
+                                    <span class="ml-1 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                        macOS
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    28.7 MB
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#" class="download-btn text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded-md">Download</a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-blue-100 text-blue-500">
+                                            <i class="fas fa-image"></i>
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">
+                                                ImageEnhancer
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">v1.4.5</div>
+                                    <div class="text-sm text-gray-500">Released: Apr 17, 2023</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        Windows
+                                    </span>
+                                    <span class="ml-1 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                        macOS
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    42.1 MB
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#" class="download-btn text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md">Download</a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-purple-100 text-purple-500">
+                                            <i class="fas fa-database"></i>
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">
+                                                DataVault
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">v2.8.0</div>
+                                    <div class="text-sm text-gray-500">Released: May 23, 2023</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        Windows
+                                    </span>
+                                    <span class="ml-1 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                        macOS
+                                    </span>
+                                    <span class="ml-1 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                        Linux
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    18.9 MB
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#" class="download-btn text-white bg-purple-500 hover:bg-purple-600 px-4 py-2 rounded-md">Download</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    About The Developer
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Meet the person behind these software creations.
+                </p>
+            </div>
+
+            <div class="mt-12">
+                <div class="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+                    <div class="relative">
+                        <div class="aspect-w-3 aspect-h-2 rounded-lg shadow-lg overflow-hidden">
+                            <div class="h-64 w-full bg-gray-200 rounded-lg flex items-center justify-center text-gray-400">
+                                <i class="fas fa-user-circle text-6xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-10 lg:mt-0">
+                        <h3 class="text-2xl font-extrabold text-gray-900">
+                            Software Developer & Problem Solver
+                        </h3>
+                        <p class="mt-3 text-lg text-gray-500">
+                            I'm a passionate developer with 8+ years of experience creating software solutions that solve real-world problems. My journey began with a simple calculator app in college, and has grown into a diverse portfolio of applications used by thousands of people.
+                        </p>
+                        <p class="mt-3 text-lg text-gray-500">
+                            My mission is to create intuitive, high-quality software that makes people's lives easier. I focus on clean code, user experience, and continuous improvement based on user feedback.
+                        </p>
+                        <div class="mt-6">
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800">
+                                    <i class="fab fa-github text-xl"></i>
+                                </a>
+                                <a href="#" class="text-blue-500 hover:text-blue-700">
+                                    <i class="fab fa-linkedin text-xl"></i>
+                                </a>
+                                <a href="#" class="text-blue-400 hover:text-blue-600">
+                                    <i class="fab fa-twitter text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12">
+                <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    <div class="pt-6">
+                        <div class="flow-root bg-white rounded-lg px-6 pb-8 shadow-lg">
+                            <div class="-mt-6">
+                                <div>
+                                    <span class="inline-flex items-center justify-center p-3 bg-indigo-500 rounded-md shadow-lg">
+                                        <i class="fas fa-code text-white text-xl"></i>
+                                    </span>
+                                </div>
+                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Languages</h3>
+                                <p class="mt-5 text-base text-gray-500">
+                                    Python, JavaScript, C++, Java, C#, SQL, HTML/CSS
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6">
+                        <div class="flow-root bg-white rounded-lg px-6 pb-8 shadow-lg">
+                            <div class="-mt-6">
+                                <div>
+                                    <span class="inline-flex items-center justify-center p-3 bg-indigo-500 rounded-md shadow-lg">
+                                        <i class="fas fa-tools text-white text-xl"></i>
+                                    </span>
+                                </div>
+                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Tools & Frameworks</h3>
+                                <p class="mt-5 text-base text-gray-500">
+                                    React, Django, .NET, Node.js, TensorFlow, Git, Docker
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6">
+                        <div class="flow-root bg-white rounded-lg px-6 pb-8 shadow-lg">
+                            <div class="-mt-6">
+                                <div>
+                                    <span class="inline-flex items-center justify-center p-3 bg-indigo-500 rounded-md shadow-lg">
+                                        <i class="fas fa-graduation-cap text-white text-xl"></i>
+                                    </span>
+                                </div>
+                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Education</h3>
+                                <p class="mt-5 text-base text-gray-500">
+                                    BS in Computer Science<br> MS in Software Engineering
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-12 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Get In Touch
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                    Have questions or suggestions? I'd love to hear from you.
+                </p>
+            </div>
+
+            <div class="mt-12 max-w-lg mx-auto">
+                <div class="bg-white shadow overflow-hidden rounded-lg">
+                    <div class="px-4 py-5 sm:p-6">
+                        <form action="#" method="POST" class="grid grid-cols-1 gap-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                                <div class="mt-1">
+                                    <input type="text" name="name" id="name" class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                <div class="mt-1">
+                                    <input type="email" name="email" id="email" autocomplete="email" class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                                <div class="mt-1">
+                                    <textarea id="message" name="message" rows="4" class="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"></textarea>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-white shadow overflow-hidden rounded-lg">
+                    <div class="px-4 py-5 sm:p-6">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">
+                            Contact Information
+                        </h3>
+                        <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-envelope text-indigo-600"></i>
+                                </div>
+                                <div class="ml-3 text-base text-gray-500">
+                                    <p>contact@example.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-phone text-indigo-600"></i>
+                                </div>
+                                <div class="ml-3 text-base text-gray-500">
+                                    <p>+1 (555) 123-4567</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-indigo-600"></i>
+                                </div>
+                                <div class="ml-3 text-base text-gray-500">
+                                    <p>San Francisco, CA</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-clock text-indigo-600"></i>
+                                </div>
+                                <div class="ml-3 text-base text-gray-500">
+                                    <p>Mon-Fri: 9AM-5PM (PST)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Frequently Asked Questions
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Answers to common questions about my software projects.
+                </p>
+            </div>
+
+            <div class="mt-12">
+                <dl class="space-y-6 divide-y divide-gray-200">
+                    <div class="pt-6">
+                        <dt class="text-lg">
+                            <button type="button" class="text-left w-full flex justify-between items-start text-gray-400 focus:outline-none">
+                                <span class="font-medium text-gray-900">Are all your programs free to use?</span>
+                                <span class="ml-6 h-7 flex items-center">
+                                    <i class="fas fa-chevron-down"></i>
+                                </span>
+                            </button>
+                        </dt>
+                        <dd class="mt-2 pr-12">
+                            <p class="text-base text-gray-500">Yes, all programs available on this site are free for personal and educational use. For commercial applications, please contact me directly to discuss licensing options.</p>
+                        </dd>
+                    </div>
+
+                    <div class="pt-6">
+                        <dt class="text-lg">
+                            <button type="button" class="text-left w-full flex justify-between items-start text-gray-400 focus:outline-none">
+                                <span class="font-medium text-gray-900">How frequently are your programs updated?</span>
+                                <span class="ml-6 h-7 flex items-center">
+                                    <i class="fas fa-chevron-down"></i>
+                                </span>
+                            </button>
+                        </dt>
+                        <dd class="mt-2 pr-12">
+                            <p class="text-base text-gray-500">I typically release major updates every 3-6 months and minor updates (bug fixes, small improvements) as needed. You can subscribe to email notifications to be alerted when new versions are available.</p>
+                        </dd>
+                    </div>
+
+                    <div class="pt-6">
+                        <dt class="text-lg">
+                            <button type="button" class="text-left w-full flex justify-between items-start text-gray-400 focus:outline-none">
+                                <span class="font-medium text-gray-900">Can I request custom features or modifications?</span>
+                                <span class="ml-6 h-7 flex items-center">
+                                    <i class="fas fa-chevron-down"></i>
+                                </span>
+                            </button>
+                        </dt>
+                        <dd class="mt-2 pr-12">
+                            <p class="text-base text-gray-500">Absolutely! I welcome feature requests and suggestions. While I can't guarantee all requests will be implemented, user feedback is invaluable in guiding future development. For urgent or specific customizations, I also offer
+                                consulting services.</p>
+                        </dd>
+                    </div>
+
+                    <div class="pt-6">
+                        <dt class="text-lg">
+                            <button type="button" class="text-left w-full flex justify-between items-start text-gray-400 focus:outline-none">
+                                <span class="font-medium text-gray-900">How can I report bugs or issues?</span>
+                                <span class="ml-6 h-7 flex items-center">
+                                    <i class="fas fa-chevron-down"></i>
+                                </span>
+                            </button>
+                        </dt>
+                        <dd class="mt-2 pr-12">
+                            <p class="text-base text-gray-500">You can report bugs through the contact form or by sending an email to support@example.com. Please include detailed information about the issue, steps to reproduce it, and your system specifications. This helps me identify
+                                and fix problems more quickly.</p>
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+                <div class="space-y-8 xl:col-span-1">
+                    <h3 class="text-2xl font-bold text-white">CodeShare</h3>
+                    <p class="text-gray-300 text-base">
+                        Sharing useful software solutions with the world. Building tools that solve real problems.
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-gray-300">
+                            <span class="sr-only">GitHub</span>
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-gray-300">
+                            <span class="sr-only">Twitter</span>
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-gray-300">
+                            <span class="sr-only">LinkedIn</span>
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
+                    <div class="md:grid md:grid-cols-2 md:gap-8">
+                        <div>
+                            <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+                                Projects
+                            </h3>
+                            <ul role="list" class="mt-4 space-y-4">
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Advanced Calculator
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        TaskMaster Pro
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        ImageEnhancer
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        DataVault
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-12 md:mt-0">
+                            <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+                                Support
+                            </h3>
+                            <ul role="list" class="mt-4 space-y-4">
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Documentation
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Tutorials
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        FAQ
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Bug Reports
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="md:grid md:grid-cols-2 md:gap-8">
+                        <div>
+                            <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+                                About
+                            </h3>
+                            <ul role="list" class="mt-4 space-y-4">
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        About Me
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Blog
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Partners
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Testimonials
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-12 md:mt-0">
+                            <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+                                Legal
+                            </h3>
+                            <ul role="list" class="mt-4 space-y-4">
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Privacy
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Terms
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        License
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Cookie Policy
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8">
+                <p class="text-base text-gray-400 xl:text-center">
+                    &copy; 2023 CodeShare. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for the FAQ section
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqButtons = document.querySelectorAll('dt button');
+
+            faqButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const parent = button.parentElement.parentElement;
+                    const dd = parent.querySelector('dd');
+                    const icon = button.querySelector('i');
+
+                    // Toggle visibility
+                    if (dd.style.display === 'none' || !dd.style.display) {
+                        dd.style.display = 'block';
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        dd.style.display = 'none';
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
