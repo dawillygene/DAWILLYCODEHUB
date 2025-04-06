@@ -5,11 +5,11 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProgramController;
 use Illuminate\Support\Facades\Route;
 
-// Public routes
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
 
-// Program routes
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+
+
 Route::get('/programs', [ProgramController::class, 'index']);
 Route::get('/programs/{program}', [ProgramController::class, 'show']);
 Route::get('/programs/{program}/download', [ProgramController::class, 'download']);
@@ -17,6 +17,11 @@ Route::get('/programs/{program}/download', [ProgramController::class, 'download'
 // Category routes
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{category}', [CategoryController::class, 'show']);
+
+Route::get('/', function () {
+  return ('Hello, World!');
+});
+
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {

@@ -1,5 +1,4 @@
-// src/contexts/AuthContext.jsx
-import React, { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useCallback } from 'react';
 import { register, login, logout, getCurrentUser } from '../services/auth.service';
 
 export const AuthContext = createContext();
@@ -9,29 +8,38 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const initAuth = async () => {
-      try {
-        const storedUser = localStorage.getItem('user');
-        const token = localStorage.getItem('token');
-        
-        if (storedUser && token) {
-          setUser(JSON.parse(storedUser));
-          // Validate token and get fresh user data
-          const { data } = await getCurrentUser();
-          setUser(data);
-          localStorage.setItem('user', JSON.stringify(data));
-        }
-      } catch (err) {
-        // Clear invalid session
-        logout();
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    initAuth();
+  const clearAuth = useCallback(() => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('token_expiry');
+    setUser(null);
+    setError(null);
   }, []);
+
+  const initAuth = useCallback(async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const expiry = localStorage.getItem('token_expiry');
+      
+      // Check if token exists and isn't expired
+      if (token && expiry && new Date(expiry) > new Date()) {
+        const { data } = await getCurrentUser();
+        setUser(data);
+        localStorage.setItem('user', JSON.stringify(data));
+      } else {
+        clearAuth();
+      }
+    } catch (err) {
+      clearAuth();
+    } finally {
+      setLoading(false);
+    }
+  }, [clearAuth]);
+
+  useEffect(() => {
+    initAuth();
+  }, [initAuth]);
+
 
   const handleRegister = async (userData) => {
     try {
@@ -39,15 +47,15 @@ export const AuthProvider = ({ children }) => {
       setError(null);
       const { data } = await register(userData);
       
-      // Save user and token data
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
       setUser(data.user);
       
       return data;
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
-      throw err;
+      const message = err.response?.data?.message || 'Registration failed';
+      setError(message);
+      throw new Error(message);
     } finally {
       setLoading(false);
     }
@@ -59,15 +67,15 @@ export const AuthProvider = ({ children }) => {
       setError(null);
       const { data } = await login(credentials);
       
-      // Save user and token data
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
       setUser(data.user);
       
       return data;
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed');
-      throw err;
+      const message = err.response?.data?.message || 'Login failed';
+      setError(message);
+      throw new Error(message);
     } finally {
       setLoading(false);
     }
@@ -76,29 +84,24 @@ export const AuthProvider = ({ children }) => {
   const handleLogout = async () => {
     try {
       setLoading(true);
-      // Call logout API if user is logged in
-      if (user) {
-        await logout();
-      }
+      await logout();
     } catch (err) {
       console.error('Logout error:', err);
     } finally {
-      // Clear local storage and state
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      setUser(null);
-      setLoading(false);
+      clearAuth();
     }
   };
 
-  const value = {
+   const value = {
     user,
     loading,
     error,
+    isAuthenticated: !!user && 
+      localStorage.getItem('token') && 
+      new Date(localStorage.getItem('token_expiry')) > new Date(),
     register: handleRegister,
     login: handleLogin,
-    logout: handleLogout,
-    isAuthenticated: !!user,
+    logout: handleLogout
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

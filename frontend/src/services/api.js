@@ -6,9 +6,10 @@ const api = axios.create({
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   },
+  withCredentials: false, // Only set to true if using cookies
 });
 
-
+// Request interceptor
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
@@ -20,20 +21,18 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+// Response interceptor
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    const { response } = error;
-    
-    // Handle authentication errors
-    if (response && response.status === 401) {
+    if (error.response?.status === 401) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.location.href = '/login';
+      // Use window.location.assign instead of href for better reliability
+      window.location.assign('/login?session_expired=true');
     }
-    
     return Promise.reject(error);
   }
 );
 
-export default api
+export default api;

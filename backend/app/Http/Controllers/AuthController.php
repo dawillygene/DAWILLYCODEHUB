@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\User;
+// use Illuminate\Foundation\Auth\User;
+use App\Models\User; 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -11,6 +12,10 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
 
+//     public function register(Request $request)
+// {
+//     return response()->json(['message' => 'Test response'], 200);
+// }
 
     public function register(Request $request)
     {
@@ -20,11 +25,15 @@ class AuthController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
+       
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($request->password)
         ]);
+
+        return response()->json(['message' => 'Test response'], 200);
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -47,13 +56,17 @@ class AuthController extends Controller
             ]);
         }
 
-        $user = User::where('email', $request->email)->firstOrFail();
-        $token = $user->createToken('auth_token')->plainTextToken;
-
         return response()->json([
-            'user' => $user,
-            'token' => $token
+            'message' => "dawilly gene you need to move"
         ]);
+
+        // $user = User::where('email', $request->email)->firstOrFail();
+        // $token = $user->createToken('auth_token')->plainTextToken;
+
+        // return response()->json([
+        //     'user' => $user,
+        //     'token' => $token
+        // ]);
     }
 
     public function logout(Request $request)

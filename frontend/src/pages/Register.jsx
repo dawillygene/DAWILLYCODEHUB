@@ -11,6 +11,7 @@ const Register = () => {
     password: '',
     password_confirmation: '',
   });
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -21,7 +22,12 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
+    if (formData.password !== formData.password_confirmation) {
+      setError("Passwords don't match!");
+      return;
+    }
+
     try {
       setLoading(true);
       await register(formData);
